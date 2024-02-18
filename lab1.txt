@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int isDigitPresent(int num, int digit) {
+    // Функция, которая проверяет, присутствует ли цифра digit в числе num
+    while (num > 0) {
+        if (num % 10 == digit) {
+            return 1;  // Цифра присутствует
+        }
+        num /= 10;
+    }
+    return 0;  // Цифра отсутствует
+}
+
+int getUniqueDigits(int num) {
+    int result = 0;
+    int multiplier = 1;
+
+    while (num > 0) {
+        int digit = num % 10;
+
+        // Проверяем, присутствует ли цифра в результате
+        if (!isDigitPresent(result, digit)) {
+            // Если цифры нет, добавляем её в результат
+            result += digit * multiplier;
+            multiplier *= 10;
+        }
+
+        num /= 10;
+    }
+
+    return result;
+}
+
+int main() {
+    int inputNumber;
+
+    // Получаем ввод от пользователя
+    printf("Введите целое число: ");
+    scanf("%d", &inputNumber);
+
+    // Получаем новое число из уникальных цифр
+    int result = getUniqueDigits(inputNumber);
+
+    // Выводим результат
+    printf("Новое число из уникальных цифр: %d\n", result);
+
+    return 0;
+}
